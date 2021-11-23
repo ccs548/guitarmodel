@@ -74,8 +74,6 @@ void setup(void)
     while(1);
   }
   delay(5000);
-  
-  delay(5000);
 
   /* Use external crystal for better accuracy */
   bno.setExtCrystalUse(true);
@@ -130,3 +128,11 @@ void loop(void)
 
   delay(BNO055_SAMPLERATE_DELAY_MS);
 }
+
+void quat2Midi(void) {
+  if (qw > -.1 && qw < .1) {
+
+    qw = qw + 1;
+    qw = qw * 10000;
+    ccVal = ccVal + map(qw, 0, 20000, 0, 31);
+  }
